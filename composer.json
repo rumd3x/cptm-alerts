@@ -1,0 +1,28 @@
+{
+    "name": "rumd3x/php-cptm-alerts",
+    "description": "Alerta sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.",
+    "type": "project",
+    "require": {
+        "php": ">=7.0",
+        "rumd3x/php-persistence": "^1.0",
+        "php-http/curl-client": "^1.7",
+        "guzzlehttp/psr7": "^1.5",
+        "jolicode/slack-php-api": "^1.0",
+        "vlucas/phpdotenv": "^2.5",
+        "guzzlehttp/guzzle": "^6.3",
+        "monolog/monolog": "^1.24",
+        "nesbot/carbon": "^2.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edmur Cardoso",
+            "email": "edmurcardoso@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CptmAlerts\\": "App/"
+        }
+    }
+}
