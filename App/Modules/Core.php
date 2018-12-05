@@ -1,21 +1,20 @@
 <?php
 namespace CptmAlerts\Modules;
 
-use Exception;
+use CptmAlerts\Classes\NotificationFactory;
 use Monolog\Logger;
-use Rumd3x\Persistence\Engine;
 
 class Core
 {
     /**
      * @var \Monolog\Logger
      */
-    private $logger; 
+    private $logger;
 
     /**
-     * @var LineStatusHandler
+     * @var StatusHandler
      */
-    private $lineHandler;
+    private $statusHandler;
 
     /**
      * @var Notifier
@@ -23,13 +22,15 @@ class Core
     private $notifier;
 
     /**
-     * @param Logger $logger
+     * @param \Monolog\Logger $logger
      * @param string $slackKey
      */
-    public function __construct(Logger $logger) {
+    public function __construct(Logger $logger)
+    {
         $this->logger = $logger;
         $this->notifier = new Notifier();
-        $this->lineHandler = new LineStatusHandler();
+        $this->statusHandler = new StatusHandler();
+        $this->notificationFactory = new NotificationFactory();
     }
 
     /**
@@ -38,37 +39,30 @@ class Core
     public function run()
     {
         $this->logger->info("Checkpoint: Application is running");
-        
-        $oldStatus = $this->lineHandler->getPrevious();
-        $currentStatus = $this->lineHandler->getCurrent();
-        $this->lineHandler->persistCurrentStatus();
-        $this->logger->info("Checkpoint: Line status handled successfully");        
+
+        $oldStatus = $this->statusHandler->getPrevious();
+        $currentStatus = $this->statusHandler->getCurrent();
+        $this->statusHandler->persistCurrentStatus();
+        $this->logger->info("Checkpoint: Line status handled successfully");
 
         if (is_null($oldStatus)) {
-            $this->logger->warning('Could not get previous status. Are your storage folder permissions correct?');
+            $this->logger->warning('Could not get previous status.');
+            $this->logger->warning('If this is not your app first run, maybe your storage permissions are incorrect?');
             return -1;
         }
 
-        $diff = $this->lineHandler->getDiff($oldStatus, $currentStatus);
-        $notifications = $this->notifier->getMessagesFromDiff($diff);
-        $hasErrors = false;
-        $this->logger->info("Checkpoint: Starting notifications broadcast");  
-        foreach($notifications as $notif) {
-            $result = $this->notifier->notify($notif);
+        $diff = $this->statusHandler->getDiff($oldStatus, $currentStatus);
+        $notification = $this->notificationFactory->make($diff);
 
-            if (!$result->getOk()) {
-                $this->logger->error("Notification not sent!", (array) $result);
-                $hasErrors = true;
-                continue;
-            }
-            
-            $this->logger->info("Notification sent success!", (array) $result);
+        $this->logger->info("Checkpoint: Starting notifications broadcast");
+        $result = $this->notifier->notify($notification);
+
+        if (!$result->getOk()) {
+            $this->logger->error("Notification not sent!", (array) $result);
+            return 1;
         }
 
-        $this->logger->info(
-            sprintf("Checkpoint: All %d notifications sent", count($notifications))
-        );  
-
-        return $hasErrors ? 1 : 0;
+        $this->logger->info("Notification sent success!", (array) $result);
+        return 0;
     }
 }

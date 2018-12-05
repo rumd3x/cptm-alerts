@@ -1,64 +1,53 @@
 <?php
 namespace CptmAlerts\Classes;
 
-use Carbon\Carbon;
+class Notification
+{
 
-class Notification {
-    const COLOR_DEFAULT = "#867d7d";
-    const COLOR_SUCCESS = "#15d51b";
-    const COLOR_DANGER = "#ce1a1a";
-    const COLOR_WARNING = "#f4ae2d";
-    const COLOR_INFO = "#00b0dd";
-
-    /**
-     * @param string $text
-     * @var array
-     */
-    private $data;
+    public $text;
+    public $channel;
+    public $username;
+    public $attachments;
 
     /**
      * @param string $text
      */
-    public function __construct(string $text) {
-        $this->data = [
-            'color' => self::COLOR_DEFAULT,
-            'text' => $text,
-            'ts' => Carbon::now()->timestamp,
-            'footer' => 'CPTM Alert Service',
-            'fields' => [],
-        ];
+    public function __construct(string $text)
+    {
+        $this->text = $text;
+        $this->channel = getenv('SLACK_CHANNEL');
+        $this->username = getenv('SLACK_BOT_USERNAME');
+        $this->attachments = collect();
     }
 
     /**
-     * @param string $color
+     * @param Attachment $attachment
      * @return self
      */
-    public function setColor(string $color) {
-        $this->data['color'] = $color;
-        return $this;
-    }
-
-    /**
-     * @param string $title
-     * @param string $text
-     * @param boolean $short
-     * @return self
-     */
-    public function addField(string $title, string $text, bool $short) {
-        $this->data['fields'][] = [
-            'title' => $title,
-            'text' => $text,
-            'short' => $short
-        ];
+    public function attach(Attachment $attachment)
+    {
+        $this->attachments->push($attachment);
         return $this;
     }
 
     /**
      * @return array
      */
-    public function toAttachments() {
-        return [
-            'attachments' => json_encode([$this->data])
+    public function toArray()
+    {
+        $array = [
+            'text' => $this->text,
+            'channel' => $this->channel,
         ];
+
+        if (!$this->attachments->isEmpty()) {
+            $array['attachments'] = json_encode(
+                $this->attachments->map(function ($item) {
+                    return $item->toArray();
+                })->all()
+            );
+        }
+
+        return $array;
     }
 }
