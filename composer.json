@@ -11,7 +11,8 @@
         "vlucas/phpdotenv": "^2.5",
         "guzzlehttp/guzzle": "^6.3",
         "monolog/monolog": "^1.24",
-        "nesbot/carbon": "^2.7"
+        "nesbot/carbon": "^2.7",
+        "tightenco/collect": "^5.7"
     },
     "license": "MIT",
     "authors": [
