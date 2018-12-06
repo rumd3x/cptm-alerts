@@ -22,11 +22,10 @@ class Attachment
      */
     public function __construct(string $text)
     {
-        $this->data = [
-            'color' => self::COLOR_DEFAULT,
-            'text' => $text,
-            'fields' => [],
-        ];
+        $this->data = collect();
+        $this->data->put('color', self::COLOR_DEFAULT);
+        $this->data->put('text', $text);
+        $this->data->put('fields', collect());
     }
 
     /**
@@ -51,19 +50,12 @@ class Attachment
     }
 
     /**
-     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
-     * @param string $title
-     * @param string $text
-     * @param boolean $short
+     * @param Field $field
      * @return self
      */
-    public function addField(string $title, string $text, bool $short = false)
+    public function addField(Field $field)
     {
-        $this->data['fields'][] = [
-            'title' => $title,
-            'value' => $text,
-            'short' => $short,
-        ];
+        $this->data->get('fields')->push($field);
         return $this;
     }
 
@@ -72,6 +64,6 @@ class Attachment
      */
     public function toArray()
     {
-        return $this->data;
+        return $this->data->all();
     }
 }
