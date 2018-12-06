@@ -3,10 +3,6 @@ namespace CptmAlerts\Classes;
 
 class LineStatus
 {
-    const OPERACAO_NORMAL = 'Operação Normal';
-    const VELOCIDADE_REDUZIDA = 'Velocidade Reduzida';
-    const OPERACAO_ENCERRADA = 'Operações Encerradas';
-
     /**
      * @var Line
      */
