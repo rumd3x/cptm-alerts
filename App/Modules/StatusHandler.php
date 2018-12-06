@@ -88,6 +88,9 @@ class StatusHandler
             $statusObj->dthOcorrencia = Carbon::parse($status->criado);
             $statusObj->dthAtualizado = Carbon::parse($status->modificado);
             $statusObj->situacao = $status->situacao;
+            if (isset($status->descricao)) {
+                $statusObj->descricao = $status->descricao;
+            }
             $return->push($statusObj);
         }
         return $return;
