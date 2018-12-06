@@ -8,7 +8,7 @@ class LineStatus
     const OPERACAO_ENCERRADA = 'Operações Encerradas';
 
     /**
-     * @var int
+     * @var Line
      */
     public $linha;
 
@@ -31,6 +31,16 @@ class LineStatus
      * @var string
      */
     public $descricao;
+
+    public function __construct(Line $line)
+    {
+        $this->line = $line;
+    }
+
+    public function getLine(Line $line)
+    {
+        return $this->line;
+    }
 
     /**
      * Compares two line status

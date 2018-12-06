@@ -2,6 +2,7 @@
 namespace CptmAlerts\Modules;
 
 use Carbon\Carbon;
+use CptmAlerts\Classes\Line;
 use CptmAlerts\Classes\LineStatus;
 use CptmAlerts\Classes\LineStatusDiff;
 use GuzzleHttp\Client as Guzzle;
@@ -83,8 +84,7 @@ class StatusHandler
     {
         $return = collect();
         foreach ($statusArray as $status) {
-            $statusObj = new LineStatus();
-            $statusObj->linha = $status->codigo;
+            $statusObj = new LineStatus(new Line($status->codigo));
             $statusObj->dthOcorrencia = Carbon::parse($status->criado);
             $statusObj->dthAtualizado = Carbon::parse($status->modificado);
             $statusObj->situacao = $status->situacao;
