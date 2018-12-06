@@ -28,11 +28,19 @@ class LineStatus
      */
     public $descricao;
 
+    /**
+     * @param Line $line
+     * @return self
+     */
     public function __construct(Line $line)
     {
         $this->line = $line;
+        return $this;
     }
 
+    /**
+     * @return Line
+     */
     public function getLine()
     {
         return $this->line;
