@@ -37,7 +37,7 @@ class LineStatus
         $this->line = $line;
     }
 
-    public function getLine(Line $line)
+    public function getLine()
     {
         return $this->line;
     }
