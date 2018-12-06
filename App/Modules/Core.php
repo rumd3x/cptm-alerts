@@ -52,6 +52,11 @@ class Core
         }
 
         $diff = $this->statusHandler->getDiff($oldStatus, $currentStatus);
+        if ($diff->isEmpty()) {
+            $this->logger->info("No status change to notify");
+            return 0;
+        }
+
         $notification = $this->notificationFactory->make($diff);
 
         $this->logger->info("Checkpoint: Starting notifications broadcast");
