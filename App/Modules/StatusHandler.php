@@ -105,7 +105,7 @@ class StatusHandler
         $newStatus = $this->buildStatus($newStatus);
 
         foreach ($newStatus as $key => $currentNewStatus) {
-            $currentOldStatus = $oldStatus[$key];
+            $currentOldStatus = $oldStatus->get($key);
             if ($currentNewStatus->situacao !== $currentOldStatus->situacao) {
                 $return->push(new LineStatusDiff($currentOldStatus, $currentNewStatus));
             }
