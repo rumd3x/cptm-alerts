@@ -1,7 +1,7 @@
 # php-cptm-alerts
 Notificações em tempo real sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.
 
-[Notificação Exemplo](/docs/images/notificacoes.jpg)
+![Notificação Exemplo](/docs/images/notificacoes.jpg)
 
 ## Getting started
 ### Workspace
@@ -12,13 +12,13 @@ Notificações em tempo real sobre mudanças de status nas linhas dos trens e me
 
 2. Para isso [crie um App no seu Workspace](https://api.slack.com/apps)
 
-[Notificação Exemplo](/docs/images/app.jpg)
+![App no Workspace](/docs/images/app.jpg)
 
 3. Após criado o App, vá até **Bot Users** no menu lateral e crie um Bot para seu App.
 
 4. Após criado o Bot, vá até **OAuth & Permissions** no menu lateral. Na seção **Scope** dê a permissão *chat:write:bot* e *bot* para o seu App. Será solicitado que o App seja reinstalado no Workspace para as novas permissões.
 
-[Notificação Exemplo](/docs/images/appconfig.jpg)
+![App configurado corretamente](/docs/images/appconfig.jpg)
 
 5. Após dadas as permissões e reinstalado o App salve a **Bot User OAuth Access Token** ela será necessária para configurar o projeto.
 
