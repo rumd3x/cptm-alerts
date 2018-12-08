@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 use CptmAlerts\Modules\Core;
 use Dotenv\Dotenv;
 use Monolog\Handler\StreamHandler;
