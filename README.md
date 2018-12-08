@@ -1,5 +1,7 @@
 # php-cptm-alerts
-Alerta sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack
+Notificações em tempo real sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.
+
+[Notificação Exemplo](/docs/images/notificacoes.jpg)
 
 ## Getting started
 ### Workspace
@@ -10,15 +12,22 @@ Alerta sobre mudanças de status nas linhas dos trens e metrôs de São Paulo di
 
 2. Para isso [crie um App no seu Workspace](https://api.slack.com/apps)
 
+[Notificação Exemplo](/docs/images/app.jpg)
+
 3. Após criado o App, vá até **Bot Users** no menu lateral e crie um Bot para seu App.
 
 4. Após criado o Bot, vá até **OAuth & Permissions** no menu lateral. Na seção **Scope** dê a permissão *chat:write:bot* e *bot* para o seu App. Será solicitado que o App seja reinstalado no Workspace para as novas permissões.
+
+[Notificação Exemplo](/docs/images/appconfig.jpg)
 
 5. Após dadas as permissões e reinstalado o App salve a **Bot User OAuth Access Token** ela será necessária para configurar o projeto.
 
 ### Configurando o Projeto
 
-1. Clone o repositório para uma pasta em seu servidor: `git clone https://github.com/rumd3x/php-cptm-alerts.git`.
+1. Clone o repositório para uma pasta em seu servidor: 
+```sh
+git clone https://github.com/rumd3x/php-cptm-alerts.git
+```
 
 2. Vá até a pasta do projeto: `cd php-cptm-alerts`.
 
@@ -33,4 +42,18 @@ Alerta sobre mudanças de status nas linhas dos trens e metrôs de São Paulo di
 7. Para receber automaticamente as mudanças de status coloque o comando num cron. Exemplo:
 ```sh
 * * * * * php /caminho/do/projeto/run.php >> /caminho/do/log/run.log 2>&1
-````
+```
+
+### Debugando
+#### Se você fez tudo acima corretamente e não está recebendo notificações em seu canal do slack:
+* Verifique se o composer foi executado corretamente
+* Verifique a saída do php nos logs do cron (Ou execute o comando redirecionando a saída para um arquivo).
+* Verifique os logs do projeto  no arquivo `/caminho/do/projeto/Storage/Logs/app.log`
+* Verifique se o usuário rodando o php está no grupo de permissões correto
+* Verifique se o arquivo *.env* tem permissão de leitura 
+* Verifique se a pasta *Storage* tem permissão de escrita
+
+## Todo
+* Rodar o projeto em um Container do Docker.
+* Customizar para receber notificações apenas de Linhas especifícas.
+* Customizar para receber notificações apenas de Eventos específicos.
