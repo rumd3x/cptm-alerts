@@ -55,5 +55,6 @@ git clone https://github.com/rumd3x/php-cptm-alerts.git
 
 ## Todo
 * Rodar o projeto em um Container do Docker.
-* Customizar para receber notificações apenas de Linhas especifícas.
-* Customizar para receber notificações apenas de Eventos específicos.
+* Funcionalidade para permitir receber notificações apenas de **linhas especifícas**.
+* Funcionalidade para permitir receber notificações apenas de **eventos específicos**.
+* Funcionalidade para permitir notificações apenas em **dias específicos**. 
