@@ -54,7 +54,8 @@ git clone https://github.com/rumd3x/php-cptm-alerts.git
 * Verifique se a pasta *Storage* tem permissão de escrita
 
 ## Todo
-* Rodar o projeto em um Container do Docker.
 * Funcionalidade para permitir receber notificações apenas de **linhas especifícas**.
 * Funcionalidade para permitir receber notificações apenas de **eventos específicos**.
 * Funcionalidade para permitir notificações apenas em **dias específicos**. 
+* Outros canais de notificação? Quais?
+* Rodar o projeto em um Container do Docker.
