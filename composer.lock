@@ -943,16 +943,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.7.0",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "90ff5556d4bd25954c272a22654e7bd43e8ab055"
+                "reference": "13bbbe16e4afcbbff7476cdcd1472a68950496a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/90ff5556d4bd25954c272a22654e7bd43e8ab055",
-                "reference": "90ff5556d4bd25954c272a22654e7bd43e8ab055",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/13bbbe16e4afcbbff7476cdcd1472a68950496a5",
+                "reference": "13bbbe16e4afcbbff7476cdcd1472a68950496a5",
                 "shasum": ""
             },
             "require": {
@@ -998,20 +998,20 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-12-02T10:14:51+00:00"
+            "time": "2018-12-18T10:35:13+00:00"
         },
         {
             "name": "php-http/client-common",
-            "version": "1.8.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/client-common.git",
-                "reference": "0b9ce659aa46aee106f8c66597ea0c070fcd9dff"
+                "reference": "efe327f4305813aa9025662259b78323d25b9948"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/client-common/zipball/0b9ce659aa46aee106f8c66597ea0c070fcd9dff",
-                "reference": "0b9ce659aa46aee106f8c66597ea0c070fcd9dff",
+                "url": "https://api.github.com/repos/php-http/client-common/zipball/efe327f4305813aa9025662259b78323d25b9948",
+                "reference": "efe327f4305813aa9025662259b78323d25b9948",
                 "shasum": ""
             },
             "require": {
@@ -1059,7 +1059,7 @@
                 "http",
                 "httplug"
             ],
-            "time": "2018-10-09T06:46:29+00:00"
+            "time": "2018-12-14T22:12:45+00:00"
         },
         {
             "name": "php-http/curl-client",
@@ -1703,16 +1703,16 @@
         },
         {
             "name": "rumd3x/php-persistence",
-            "version": "1.0.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rumd3x/php-persistence.git",
-                "reference": "a73d94dd8fd31097ce314ba9ad9aea3a07302f10"
+                "reference": "65321998d91f7fa1514c774157cd33328b635051"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rumd3x/php-persistence/zipball/a73d94dd8fd31097ce314ba9ad9aea3a07302f10",
-                "reference": "a73d94dd8fd31097ce314ba9ad9aea3a07302f10",
+                "url": "https://api.github.com/repos/rumd3x/php-persistence/zipball/65321998d91f7fa1514c774157cd33328b635051",
+                "reference": "65321998d91f7fa1514c774157cd33328b635051",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1735,7 @@
                 }
             ],
             "description": "Store and retrieve data without a database.",
-            "time": "2018-12-03T00:59:21+00:00"
+            "time": "2018-12-19T02:20:37+00:00"
         },
         {
             "name": "symfony/contracts",
@@ -2320,16 +2320,16 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v5.7.16",
+            "version": "v5.7.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tightenco/collect.git",
-                "reference": "52a7b56dc0a9d265dd5911dff433dedd3417dcc4"
+                "reference": "799108d67cdc9843ed3569ae2989888826166381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tightenco/collect/zipball/52a7b56dc0a9d265dd5911dff433dedd3417dcc4",
-                "reference": "52a7b56dc0a9d265dd5911dff433dedd3417dcc4",
+                "url": "https://api.github.com/repos/tightenco/collect/zipball/799108d67cdc9843ed3569ae2989888826166381",
+                "reference": "799108d67cdc9843ed3569ae2989888826166381",
                 "shasum": ""
             },
             "require": {
@@ -2366,7 +2366,7 @@
                 "collection",
                 "laravel"
             ],
-            "time": "2018-12-07T15:32:04+00:00"
+            "time": "2018-12-17T15:11:32+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

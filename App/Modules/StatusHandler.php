@@ -27,7 +27,7 @@ class StatusHandler
 
     public function __construct()
     {
-        $this->persistence = new Engine('../../../../Storage/Persistence/cptm');
+        $this->persistence = new Engine(__DIR__.'/../../Storage/Persistence/cptm');
         $this->currentStatus = $this->retrieveCurrentStatus();
         $this->previousStatus = $this->retrievePreviousStatus();
     }

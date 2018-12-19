@@ -3,3 +3,4 @@ test.php
 vendor/
 Storage/Logs/*.log
 Storage/Persistence/*.pe
+**/Thumbs.db
