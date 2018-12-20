@@ -24,7 +24,7 @@ Notificações em tempo real sobre mudanças de status nas linhas dos trens e me
 
 ### Configurando o Projeto
 
-1. Clone o repositório para uma pasta em seu servidor: 
+1. Clone o repositório para uma pasta em seu servidor:
 ```sh
 git clone https://github.com/rumd3x/php-cptm-alerts.git
 ```
@@ -50,12 +50,12 @@ git clone https://github.com/rumd3x/php-cptm-alerts.git
 * Verifique a saída do php nos logs do cron (Ou execute o comando redirecionando a saída para um arquivo).
 * Verifique os logs do projeto  no arquivo `/caminho/do/projeto/Storage/Logs/app.log`
 * Verifique se o usuário rodando o php está no grupo de permissões correto
-* Verifique se o arquivo *.env* tem permissão de leitura 
+* Verifique se o arquivo *.env* tem permissão de leitura
 * Verifique se a pasta *Storage* tem permissão de escrita
 
 ## Todo
+* Documentar a configuração de receber notificações apenas de **eventos específicos**.
 * Funcionalidade para permitir receber notificações apenas de **linhas especifícas**.
-* Funcionalidade para permitir receber notificações apenas de **eventos específicos**.
-* Funcionalidade para permitir notificações apenas em **dias específicos**. 
+* Funcionalidade para permitir notificações apenas em **dias específicos**.
 * Outros canais de notificação? Quais?
 * Rodar o projeto em um Container do Docker.

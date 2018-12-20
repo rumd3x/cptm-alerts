@@ -47,6 +47,7 @@ class Core
         $dotenv->load();
         $dotenv->required('SLACK_KEY')->notEmpty();
         $dotenv->required('SLACK_CHANNEL')->notEmpty();
+        $dotenv->required('NOTIFY_LEVEL')->isInteger();
 
         try {
             $returnCode = $this->run();
@@ -83,7 +84,7 @@ class Core
             return -1;
         }
 
-        $diff = $this->statusHandler->getDiff($oldStatus, $currentStatus);
+        $diff = $this->statusHandler->getAllDiff($oldStatus, $currentStatus);
         if ($diff->isEmpty()) {
             $this->logger->info("No status change to notify");
             return 0;

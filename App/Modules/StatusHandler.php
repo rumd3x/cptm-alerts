@@ -101,19 +101,24 @@ class StatusHandler
      * @param array $newStatus
      * @return \Tightenco\Collect\Support\Collection of LineStatusDiff
      */
-    public function getDiff(array $oldStatus, array $newStatus)
+    public function getAllDiff(array $oldStatus, array $newStatus)
     {
-        $return = collect();
+        $allDiffs = collect();
         $oldStatus = $this->buildStatus($oldStatus);
         $newStatus = $this->buildStatus($newStatus);
 
         foreach ($newStatus as $key => $currentNewStatus) {
             $currentOldStatus = $oldStatus->get($key);
-            if (!$currentNewStatus->equals($currentOldStatus)) {
-                $return->push(new LineStatusDiff($currentOldStatus, $currentNewStatus));
+            if ($currentNewStatus->equals($currentOldStatus)) {
+                continue;
             }
+            $diff = new LineStatusDiff($currentOldStatus, $currentNewStatus);
+            if ($diff->getLevel() < getenv('NOTIFY_LEVEL')) {
+                continue;
+            }
+            $allDiffs->push($diff);
         }
 
-        return $return;
+        return $allDiffs;
     }
 }

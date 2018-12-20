@@ -37,7 +37,7 @@ class NotificationFactory
             $attachment = new Attachment($headline);
             $attachment->addField(new Field('big', $bigFieldTop, $bigFieldBottom));
 
-            $attachment->withFooter()->setColor($this->getDiffColor($diff));
+            $attachment->withFooter()->setColor($this->getColor($diff));
             $notification->attach($attachment);
         }
         return $notification;
@@ -47,74 +47,17 @@ class NotificationFactory
      * @param LineStatusDiff $diff
      * @return string
      */
-    private function getDiffColor(LineStatusDiff $diff)
+    private function getColor(LineStatusDiff $diff)
     {
-        if ($this->isNeutral($diff)) {
-            return Attachment::COLOR_DEFAULT;
-        }
+        $colors = [
+            0 => Attachment::COLOR_DEFAULT,
+            1 => Attachment::COLOR_SUCCESS,
+            2 => Attachment::COLOR_WARNING,
+            3 => Attachment::COLOR_DANGER,
+        ];
 
-        if ($this->isPositive($diff)) {
-            return Attachment::COLOR_SUCCESS;
-        }
+        $level = $diff->getLevel();
 
-        if ($this->isNegative($diff) && $this->isReallyBad($diff)) {
-            return Attachment::COLOR_DANGER;
-        }
-
-        if ($this->isNegative($diff)) {
-            return Attachment::COLOR_WARNING;
-        }
-
-        return Attachment::COLOR_INFO;
-    }
-
-    /**
-     * Discover if the status change was just normal and expected
-     *
-     * @param LineStatusDiff $diff
-     * @return boolean
-     */
-    private function isNeutral(LineStatusDiff $diff)
-    {
-        $startedNow = strpos(strtolower($diff->getOld()->situacao), 'encerrada') !== false;
-        $finishedNow = strpos(strtolower($diff->getNew()->situacao), 'encerrada') !== false;
-        return ($startedNow || $finishedNow);
-    }
-
-    /**
-     * Discover if the status change was a good thing
-     *
-     * @param LineStatusDiff $diff
-     * @return boolean
-     */
-    private function isPositive(LineStatusDiff $diff)
-    {
-        $isNeutral = $this->isNeutral($diff);
-        $isNormalized = strpos(strtolower($diff->getNew()->situacao), 'normal') !== false;
-        return (!$isNeutral && $isNormalized);
-    }
-
-    /**
-     * Discover if the status change was a bad thing
-     *
-     * @param LineStatusDiff $diff
-     * @return boolean
-     */
-    private function isNegative(LineStatusDiff $diff)
-    {
-        return !$this->isPositive($diff);
-    }
-
-    /**
-     * Discover if the status change is really that bad
-     *
-     * @param LineStatusDiff $diff
-     * @return boolean
-     */
-    private function isReallyBad(LineStatusDiff $diff)
-    {
-        $isNegative = $this->isNegative($diff);
-        $isParalized = strpos(strtolower($diff->getNew()->situacao), 'paralisada') !== false;
-        return ($isNegative && $isParalized);
+        return isset($colors[$level]) ? $colors[$level] : Attachment::COLOR_INFO;
     }
 }
