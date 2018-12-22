@@ -44,6 +44,25 @@ git clone https://github.com/rumd3x/php-cptm-alerts.git
 * * * * * php /caminho/do/projeto/run.php >> /caminho/do/log/run.log 2>&1
 ```
 
+### Arquivo .env
+No arquivo `.env` existem possibilidades de personalização no comportamento da aplicação, por meio de configurações no arquivo `.env`
+
+#### NOTIFY_LEVEL
+A configuração `NOTIFY_LEVEL` deve conter um número inteiro válido e representa o menor nível de criticidade que a aplicação notificará.
+
+Os níveis existentes são:
+```
+Nível 0: Mudanças já esperadas, como o encerramento das operações as 0h e o início das operações.
+Nível 1: Mudanças positivas, como a normalização da operação após um período de lentidão.
+Nível 2: Mudanças alarmantes, como a operação da linha estar com lentidão.
+Nível 3: Mudanças perigosas, como a paralização da operação em uma linha.
+```
+
+- Exemplo:
+
+Se desejar receber notificações em todos os níveis deverá configurar para `NOTIFY_LEVEL=0`. Se não quiser receber notificações de mudanças já esperadas trocar para `NOTIFY_LEVEL=1`. Se quiser receber apenas notificações de paralização `NOTIFY_LEVEL=3`.
+
+
 ### Debugando
 #### Se você fez tudo acima corretamente e não está recebendo notificações em seu canal do slack:
 * Verifique se o composer foi executado corretamente
