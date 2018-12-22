@@ -73,7 +73,6 @@ Se desejar receber notificações em todos os níveis deverá configurar para `N
 * Verifique se a pasta *Storage* tem permissão de escrita
 
 ## Todo
-* Documentar a configuração de receber notificações apenas de **eventos específicos**.
 * Funcionalidade para permitir receber notificações apenas de **linhas especifícas**.
 * Funcionalidade para permitir notificações apenas em **dias específicos**.
 * Outros canais de notificação? Quais?
