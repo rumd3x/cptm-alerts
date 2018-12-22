@@ -1,11 +1,12 @@
 <?php
 namespace CptmAlerts\Modules;
 
-use CptmAlerts\Classes\NotificationFactory;
-use Monolog\Logger;
-
+use Exception;
 use Dotenv\Dotenv;
+
+use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use CptmAlerts\Classes\SlackNotificationFactory;
 
 class Core
 {
@@ -35,7 +36,7 @@ class Core
         $this->notifier = new Notifier();
         $this->timeTracker = new TimeTracker();
         $this->statusHandler = new StatusHandler();
-        $this->notificationFactory = new NotificationFactory();
+        $this->factory = new SlackNotificationFactory();
     }
 
     public function init()
@@ -48,6 +49,7 @@ class Core
         $dotenv->required('SLACK_KEY')->notEmpty();
         $dotenv->required('SLACK_CHANNEL')->notEmpty();
         $dotenv->required('NOTIFY_LEVEL')->isInteger();
+        $dotenv->required('NOTIFY_DAYS')->notEmpty();
 
         try {
             $returnCode = $this->run();
@@ -90,15 +92,15 @@ class Core
             return 0;
         }
 
-        $notification = $this->notificationFactory->make($diff);
+        $notification = $this->factory->make($diff);
+
+        if (!$this->notifier->shouldNotifyToday()) {
+            $this->logger->info("Notifications disabled for today.");
+            return 1;
+        }
 
         $this->logger->info("Checkpoint: Starting notifications broadcast");
         $result = $this->notifier->notify($notification);
-
-        if (!$result->getOk()) {
-            $this->logger->error("Notification not sent!", (array) $result);
-            return 1;
-        }
 
         $this->logger->info("Notification sent success!", (array) $result);
         return 0;

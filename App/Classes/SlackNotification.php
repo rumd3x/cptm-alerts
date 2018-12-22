@@ -1,9 +1,8 @@
 <?php
 namespace CptmAlerts\Classes;
 
-class Notification
+class SlackNotification
 {
-
     public $text;
     public $channel;
     public $username;

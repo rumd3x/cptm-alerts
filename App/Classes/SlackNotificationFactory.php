@@ -3,18 +3,15 @@ namespace CptmAlerts\Classes;
 
 use Tightenco\Collect\Support\Collection;
 
-class NotificationFactory
+class SlackNotificationFactory
 {
     /**
      * @param \Tightenco\Collect\Support\Collection of LineStatusDiff $diffCollection
-     * @return Notification
+     * @return SlackNotification
      */
     public function make(Collection $diffCollection)
     {
-        $notification = new Notification(sprintf(
-            '*----- Atenção para %d mudança(s) de status nas linhas -----*',
-            $diffCollection->count()
-        ));
+        $notification = new SlackNotification($this->makeHeadline($diffCollection));
 
         foreach ($diffCollection as $diff) {
             $headline = sprintf(
@@ -41,6 +38,29 @@ class NotificationFactory
             $notification->attach($attachment);
         }
         return $notification;
+    }
+
+    /**
+     * @param Collection $diffCollection
+     * @return string
+     */
+    private function makeHeadline(Collection $diffCollection)
+    {
+        if ($diffCollection->count() > 1) {
+            return sprintf(
+                "Atenção para %d mudanças de status nas linhas %s.",
+                $diffCollection->count(),
+                implode(', ', $diffCollection->map(function ($diff) {
+                    return $diff->getNew()->getLine()->linha;
+                })->toArray())
+            );
+        }
+
+        return sprintf(
+            "Alteração na Linha %d: %s",
+            $diffCollection->first()->getNew()->getLine()->linha,
+            $diffCollection->first()->getNew()->situacao
+        );
     }
 
     /**

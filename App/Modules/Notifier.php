@@ -1,7 +1,9 @@
 <?php
 namespace CptmAlerts\Modules;
 
-use CptmAlerts\Classes\Notification;
+use Exception;
+use Carbon\Carbon;
+use CptmAlerts\Classes\SlackNotification;
 use JoliCode\Slack\ClientFactory as Slack;
 
 class Notifier
@@ -20,12 +22,31 @@ class Notifier
     }
 
     /**
-     * @param Notification $notification
+     * @param SlackNotification $notification
      * @return JoliCode\Slack\Api\Model\ChatPostMessagePostResponse200
      */
-    public function notify(Notification $notification)
+    public function notify(SlackNotification $notification)
     {
         $retorno = $this->slack->chatPostMessage($notification->toArray());
+        if (!$retorno->getOk()) {
+            $errorMessage = sprintf("%s - %s", "Notification not sent!", json_encode((array) $retorno));
+            throw new Exception($errorMessage);
+        }
         return $retorno;
+    }
+
+    /**
+     * @return bool
+     */
+    public function shouldNotifyToday()
+    {
+        $setting = getenv('NOTIFY_DAYS');
+        if (strtolower(trim($setting)) === 'all') {
+            return true;
+        }
+
+        $today = Carbon::today()->weekday();
+        $daysToNotify = explode(',', $setting);
+        return in_array($today, $daysToNotify);
     }
 }

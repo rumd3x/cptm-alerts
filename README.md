@@ -62,6 +62,23 @@ Nível 3: Mudanças perigosas, como a paralização da operação em uma linha.
 
 Se desejar receber notificações em todos os níveis deverá configurar para `NOTIFY_LEVEL=0`. Se não quiser receber notificações de mudanças já esperadas trocar para `NOTIFY_LEVEL=1`. Se quiser receber apenas notificações de paralização `NOTIFY_LEVEL=3`.
 
+#### NOTIFY_DAYS
+A configuração `NOTIFY_DAYS` diz os dias que deverão ser enviadas notificações. Deve conter os dias que as notificações serão enviadas separados por vírgula.
+
+Os valores são:
+```
+all: Enviar Notificações todos os dias
+0: Domingo
+1: Segunda-feira
+2: Terça-feira
+3: Quarta-feira
+4: Quinta-feira
+5: Sexta-feira
+6: Sábado
+```
+
+- Exemplo:
+Para receber notificações todos os dias use `NOTIFY_DAYS=all`. Para receber notificações somente em dias da semana use `NOTIFY_DAYS=1,2,3,4,5`.
 
 ### Debugando
 #### Se você fez tudo acima corretamente e não está recebendo notificações em seu canal do slack:
@@ -74,6 +91,5 @@ Se desejar receber notificações em todos os níveis deverá configurar para `N
 
 ## Todo
 * Funcionalidade para permitir receber notificações apenas de **linhas especifícas**.
-* Funcionalidade para permitir notificações apenas em **dias específicos**.
 * Outros canais de notificação? Quais?
 * Rodar o projeto em um Container do Docker.
