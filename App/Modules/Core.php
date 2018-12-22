@@ -32,24 +32,26 @@ class Core
 
     public function __construct()
     {
-        $this->logger = new Logger('CPTM Alerts');
-        $this->notifier = new Notifier();
         $this->timeTracker = new TimeTracker();
-        $this->statusHandler = new StatusHandler();
-        $this->factory = new SlackNotificationFactory();
-    }
+        $this->logger = new Logger('CPTM Alerts');
+        $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../Storage/Logs/' .  date('Y-m-d') . '-app.log'));
+        $this->logger->info('Loading assets.');
 
-    public function init()
-    {
-        $logFilename = date('Y-m-d') . '-app.log';
-        $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../Storage/Logs/' . $logFilename));
-        $this->logger->info('Application initializing.');
         $dotenv = new Dotenv(__DIR__ . '/../..');
         $dotenv->load();
         $dotenv->required('SLACK_KEY')->notEmpty();
         $dotenv->required('SLACK_CHANNEL')->notEmpty();
         $dotenv->required('NOTIFY_LEVEL')->isInteger();
         $dotenv->required('NOTIFY_DAYS')->notEmpty();
+
+        $this->notifier = new Notifier();
+        $this->statusHandler = new StatusHandler();
+        $this->factory = new SlackNotificationFactory();
+    }
+
+    public function init()
+    {
+        $this->logger->info('Initializing.');
 
         try {
             $returnCode = $this->run();
@@ -73,7 +75,7 @@ class Core
      */
     public function run()
     {
-        $this->logger->info("Checkpoint: Application is running");
+        $this->logger->info("Checkpoint: Program started");
 
         $oldStatus = $this->statusHandler->getPrevious();
         $currentStatus = $this->statusHandler->getCurrent();
