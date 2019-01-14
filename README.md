@@ -26,10 +26,10 @@ Notificações em tempo real sobre mudanças de status nas linhas dos trens e me
 
 1. Clone o repositório para uma pasta em seu servidor:
 ```sh
-git clone https://github.com/rumd3x/php-cptm-alerts.git
+git clone https://github.com/rumd3x/cptm-alerts.git
 ```
 
-2. Vá até a pasta do projeto: `cd php-cptm-alerts`.
+2. Vá até a pasta do projeto: `cd cptm-alerts`.
 
 3. Instale as dependências: `composer install`.
 
