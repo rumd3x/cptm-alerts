@@ -116,6 +116,5 @@ Para receber notificações de todas as linhas `NOTIFY_LINES=all`. Para receber 
 * Verifique se a pasta *Storage* tem permissão de escrita
 
 ## Todo
-* Funcionalidade para permitir receber notificações apenas de **linhas especifícas**.
 * Outros canais de notificação? Quais?
 * Rodar o projeto em um Container do Docker.
