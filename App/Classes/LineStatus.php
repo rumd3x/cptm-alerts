@@ -6,7 +6,7 @@ class LineStatus
     /**
      * @var Line
      */
-    public $linha;
+    public $line;
 
     /**
      * @var \Carbon\Carbon
