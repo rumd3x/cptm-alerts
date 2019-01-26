@@ -80,6 +80,32 @@ all: Enviar Notificações todos os dias
 - Exemplo:
 Para receber notificações todos os dias use `NOTIFY_DAYS=all`. Para receber notificações somente em dias da semana use `NOTIFY_DAYS=1,2,3,4,5`.
 
+#### NOTIFY_LINES
+A configuração `NOTIFY_LINES` diz as linhas dos trens/metrô que deverão ser monitoradas. Deve conter o numero das linhas separados por vírgula.
+
+Os valores são:
+```
+all: Enviar Notificações para todas as linhas
+1: Linha 1 Azul do Metrô
+2: Linha 2 Verde do Metrô
+3: Linha 3 Vermelha do Metrô
+4: Linha 4 Amarela do Metrô
+5: Linha 5 Lilás do Metrô
+6: Linha 6 Laranja do Metrô
+7: Linha 7 Rubi da CPTM
+8: Linha 8 Diamante da CPTM
+9: Linha 9 Esmeralda da CPTM
+10: Linha 10 Turquesa da CPTM
+11: Linha 11 Coral da CPTM
+12: Linha 12 Safira da CPTM
+13: Linha 13 Jade da CPTM
+15: Linha 15 Prata da CPTM
+17: Linha 17 Ouro da CPTM
+```
+
+- Exemplo:
+Para receber notificações de todas as linhas `NOTIFY_LINES=all`. Para receber notificações somente da linha azul e amarela use `NOTIFY_LINES=1,4`.
+
 ### Debugando
 #### Se você fez tudo acima corretamente e não está recebendo notificações em seu canal do slack:
 * Verifique se o composer foi executado corretamente

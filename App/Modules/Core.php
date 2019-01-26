@@ -43,6 +43,7 @@ class Core
         $dotenv->required('SLACK_CHANNEL')->notEmpty();
         $dotenv->required('NOTIFY_LEVEL')->isInteger();
         $dotenv->required('NOTIFY_DAYS')->notEmpty();
+        $dotenv->required('NOTIFY_LINES')->notEmpty();
 
         $this->notifier = new Notifier();
         $this->statusHandler = new StatusHandler();

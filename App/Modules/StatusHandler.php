@@ -84,7 +84,11 @@ class StatusHandler
     {
         $return = collect();
         foreach ($statusArray as $status) {
-            $statusObj = new LineStatus(new Line($status->codigo));
+            $line = new Line($status->codigo);
+            if (!$this->shouldNotifyLine($line)) {
+                continue;
+            }
+            $statusObj = new LineStatus($line);
             $statusObj->dthOcorrencia = Carbon::parse($status->criado);
             $statusObj->dthAtualizado = Carbon::parse($status->modificado);
             $statusObj->situacao = $status->situacao;
@@ -94,6 +98,27 @@ class StatusHandler
             $return->push($statusObj);
         }
         return $return;
+    }
+
+    /**
+     * Parse NOTIFY_LINES config and filters by it
+     *
+     * @param Line $line
+     * @return bool
+     */
+    private function shouldNotifyLine(Line $line)
+    {
+        $linesToNotify = getenv('NOTIFY_LINES');
+
+        if (strtolower(trim($linesToNotify)) === 'all') {
+            return true;
+        }
+
+        $linesToNotify = collect(explode(',', $linesToNotify))->map(function ($item) {
+            return (int) $item;
+        });
+
+        return $linesToNotify->contains($line->linha);
     }
 
     /**
