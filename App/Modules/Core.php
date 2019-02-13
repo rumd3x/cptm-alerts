@@ -6,7 +6,9 @@ use Dotenv\Dotenv;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use CptmAlerts\Classes\SlackNotificationFactory;
+use Rumd3x\Slack\Notifier as SlackNotifier;
+use CptmAlerts\Modules\Notification\Notifier;
+use CptmAlerts\Modules\Notification\Factory\SlackNotificationFactory;
 
 class Core
 {
@@ -33,7 +35,7 @@ class Core
     public function __construct()
     {
         $this->timeTracker = new TimeTracker();
-        $this->logger = new Logger('CPTM Alerts');
+        $this->logger = new Logger('CPTM Alerts by Rumd3x');
         $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../Storage/Logs/' .  date('Y-m-d') . '-app.log'));
         $this->logger->info('Loading assets.');
 
@@ -45,14 +47,15 @@ class Core
         $dotenv->required('NOTIFY_DAYS')->notEmpty();
         $dotenv->required('NOTIFY_LINES')->notEmpty();
 
-        $this->notifier = new Notifier();
         $this->statusHandler = new StatusHandler();
-        $this->factory = new SlackNotificationFactory();
+        $this->notifier = new Notifier();
     }
 
     public function init()
     {
         $this->logger->info('Initializing.');
+
+        $this->notifier->addChannel(new SlackNotificationFactory, new SlackNotifier(getenv('SLACK_KEY')));
 
         try {
             $returnCode = $this->run();
@@ -95,15 +98,8 @@ class Core
             return 0;
         }
 
-        $notification = $this->factory->make($diff);
-
-        if (!$this->notifier->shouldNotifyToday()) {
-            $this->logger->info("Notifications disabled for today.");
-            return 1;
-        }
-
         $this->logger->info("Checkpoint: Starting notifications broadcast");
-        $result = $this->notifier->notify($notification);
+        $result = $this->notifier->notify($diff);
 
         $this->logger->info("Notification sent success!", (array) $result);
         return 0;

@@ -6,13 +6,12 @@
         "php": ">=7.0",
         "rumd3x/php-persistence": "^1.0",
         "php-http/curl-client": "^1.7",
-        "guzzlehttp/psr7": "^1.5",
-        "jolicode/slack-php-api": "^1.0",
         "vlucas/phpdotenv": "^2.5",
         "guzzlehttp/guzzle": "^6.3",
         "monolog/monolog": "^1.24",
         "nesbot/carbon": "^2.7",
-        "tightenco/collect": "^5.7"
+        "tightenco/collect": "^5.7",
+        "rumd3x/slack-notifier": "^0.1.0"
     },
     "license": "MIT",
     "authors": [
