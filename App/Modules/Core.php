@@ -3,7 +3,6 @@ namespace CptmAlerts\Modules;
 
 use Exception;
 use Carbon\Carbon;
-
 use Dotenv\Dotenv;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
