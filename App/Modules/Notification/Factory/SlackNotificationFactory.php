@@ -3,8 +3,9 @@ namespace CptmAlerts\Modules\Notification\Factory;
 
 use Rumd3x\Slack\Field;
 use Rumd3x\Slack\Attachment;
-use Rumd3x\Slack\Notification as SlackNotification;
+use CptmAlerts\Classes\LineStatusDiff;
 use Tightenco\Collect\Support\Collection;
+use Rumd3x\Slack\Notification as SlackNotification;
 
 class SlackNotificationFactory implements NotificationFactoryInterface
 {

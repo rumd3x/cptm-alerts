@@ -8,7 +8,7 @@ interface NotificationFactoryInterface
 {
     /**
      * @param \Tightenco\Collect\Support\Collection of LineStatusDiff $diffCollection
-     * @return SlackNotification
+     * @return \Rumd3x\Standards\NotificationInterface
      */
     public function make(Collection $diffCollection);
 }

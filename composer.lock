@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eaa3be74c460f3d99ea0b5f0da51ccdd",
+    "content-hash": "addc61dfd52ea95d10c54ffd374437e8",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1704,6 +1704,42 @@
             "time": "2016-02-11T07:05:27+00:00"
         },
         {
+            "name": "rumd3x/notifier-interface",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rumd3x/notifier-interface.git",
+                "reference": "a663cf9ab2e2a481c910034ac38067ce6a6f9262"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rumd3x/notifier-interface/zipball/a663cf9ab2e2a481c910034ac38067ce6a6f9262",
+                "reference": "a663cf9ab2e2a481c910034ac38067ce6a6f9262",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rumd3x\\Standards\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "rumd3x",
+                    "email": "edmurcardoso@gmail.com"
+                }
+            ],
+            "description": "Standard interface for objects that send notifications.",
+            "time": "2019-02-13T23:50:50+00:00"
+        },
+        {
             "name": "rumd3x/php-persistence",
             "version": "1.4.0",
             "source": {
@@ -1741,16 +1777,16 @@
         },
         {
             "name": "rumd3x/slack-notifier",
-            "version": "0.1.1",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rumd3x/slack-notifier.git",
-                "reference": "39913c6f3a9aa3bd53c07f106e009805f43a4577"
+                "reference": "634c3e7200f1251111c4e2f82792a802ca720f10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rumd3x/slack-notifier/zipball/39913c6f3a9aa3bd53c07f106e009805f43a4577",
-                "reference": "39913c6f3a9aa3bd53c07f106e009805f43a4577",
+                "url": "https://api.github.com/repos/rumd3x/slack-notifier/zipball/634c3e7200f1251111c4e2f82792a802ca720f10",
+                "reference": "634c3e7200f1251111c4e2f82792a802ca720f10",
                 "shasum": ""
             },
             "require": {
@@ -1758,6 +1794,7 @@
                 "nesbot/carbon": "^2.11",
                 "php": ">=7.0",
                 "php-http/curl-client": "^1.7",
+                "rumd3x/notifier-interface": "^1.0",
                 "tightenco/collect": "^5.7"
             },
             "type": "library",
@@ -1777,7 +1814,7 @@
                 }
             ],
             "description": "Wrapper for sending customized channel notifications using slack.",
-            "time": "2019-02-13T02:47:37+00:00"
+            "time": "2019-02-14T00:08:56+00:00"
         },
         {
             "name": "symfony/contracts",

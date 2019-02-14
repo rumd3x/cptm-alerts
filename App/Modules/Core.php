@@ -98,10 +98,30 @@ class Core
             return 0;
         }
 
+        if (!$this->shouldNotifyToday()) {
+            $this->logger->info("Notifications disabled for today");
+            return 1;
+        }
+
         $this->logger->info("Checkpoint: Starting notifications broadcast");
         $result = $this->notifier->notify($diff);
 
         $this->logger->info("Notification sent success!", (array) $result);
         return 0;
+    }
+
+    /**
+     * @return bool
+     */
+    private function shouldNotifyToday()
+    {
+        $setting = getenv('NOTIFY_DAYS');
+        if (strtolower(trim($setting)) === 'all') {
+            return true;
+        }
+
+        $today = Carbon::today()->weekday();
+        $daysToNotify = explode(',', $setting);
+        return in_array($today, $daysToNotify);
     }
 }
