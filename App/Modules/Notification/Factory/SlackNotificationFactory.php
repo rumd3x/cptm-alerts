@@ -1,9 +1,13 @@
 <?php
-namespace CptmAlerts\Classes;
+namespace CptmAlerts\Modules\Notification\Factory;
 
+use Rumd3x\Slack\Field;
+use Rumd3x\Slack\Attachment;
+use CptmAlerts\Classes\LineStatusDiff;
 use Tightenco\Collect\Support\Collection;
+use Rumd3x\Slack\Notification as SlackNotification;
 
-class SlackNotificationFactory
+class SlackNotificationFactory implements NotificationFactoryInterface
 {
     /**
      * @param \Tightenco\Collect\Support\Collection of LineStatusDiff $diffCollection
@@ -11,7 +15,11 @@ class SlackNotificationFactory
      */
     public function make(Collection $diffCollection)
     {
-        $notification = new SlackNotification($this->makeHeadline($diffCollection));
+        $notification = new SlackNotification(
+            $this->makeHeadline($diffCollection),
+            getenv('SLACK_CHANNEL'),
+            getenv('SLACK_BOT_USERNAME')
+        );
 
         foreach ($diffCollection as $diff) {
             $headline = sprintf(
