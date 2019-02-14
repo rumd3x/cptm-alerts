@@ -2,8 +2,9 @@
 namespace CptmAlerts\Modules;
 
 use Exception;
-use Dotenv\Dotenv;
+use Carbon\Carbon;
 
+use Dotenv\Dotenv;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Rumd3x\Slack\Notifier as SlackNotifier;

@@ -2,7 +2,6 @@
 namespace CptmAlerts\Modules\Notification;
 
 use Exception;
-use Carbon\Carbon;
 use Rumd3x\Standards\NotifierInterface;
 use Tightenco\Collect\Support\Collection;
 use CptmAlerts\Modules\Notification\Factory\NotificationFactoryInterface;
