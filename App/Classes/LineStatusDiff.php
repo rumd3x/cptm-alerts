@@ -46,16 +46,16 @@ class LineStatusDiff
      */
     public function getLevel()
     {
-        if ($this->isNeutral()) {
-            return 0;
-        }
-
         if ($this->isPositive()) {
             return 1;
         }
 
-        if ($this->isNegative() && $this->isReallyBad()) {
+        if ($this->isReallyBad()) {
             return 3;
+        }
+
+        if ($this->isNeutral()) {
+            return 0;
         }
 
         if ($this->isNegative()) {
@@ -84,9 +84,8 @@ class LineStatusDiff
      */
     public function isPositive()
     {
-        $isNeutral = $this->isNeutral();
         $isNormalized = strpos(strtolower($this->getNew()->situacao), 'normal') !== false;
-        return (!$isNeutral && $isNormalized);
+        return ($isNormalized && !$this->isNeutral());
     }
 
     /**
@@ -100,14 +99,14 @@ class LineStatusDiff
     }
 
     /**
-     * Discover if the status change is really that bad
+     * Discover if the status change is worse than normal
      *
      * @return boolean
      */
     public function isReallyBad()
     {
-        $isNegative = $this->isNegative();
         $isParalized = strpos(strtolower($this->getNew()->situacao), 'paralisada') !== false;
-        return ($isNegative && $isParalized);
+        $isWorkingPartially = strpos(strtolower($this->getNew()->situacao), 'parcial') !== false;
+        return ($isParalized || $isWorkingPartially);
     }
 }
