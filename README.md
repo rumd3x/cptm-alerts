@@ -31,7 +31,7 @@ Notificações em tempo real sobre mudanças de status nas linhas dos trens e me
 
 ### Rodando via Docker
 
-* Crie um container do projeto com o comando:
+- Crie um container do projeto com o comando:
 ```sh
 docker run --detach \
 --env SLACK_KEY=your-slack-bot-oauth-key \
@@ -42,10 +42,10 @@ docker run --detach \
 --restart unless-stopped \
 edmur/cptm-alerts
 ```
-Substitua os valores para as chaves `SLACK_KEY` e `SLACK_CHANNEL`. 
-Os parametros `NOTIFY_LEVEL`, `NOTIFY_DAYS` e `NOTIFY_LINES` são opcionais e podem ser omitidos.
+* Substitua os valores para as chaves `SLACK_KEY` e `SLACK_CHANNEL`. 
+* Os parametros `NOTIFY_LEVEL`, `NOTIFY_DAYS` e `NOTIFY_LINES` são opcionais e podem ser omitidos.
 
-Para rodar em produção recomendo que crie um volume para manter a persistencia dos dados e para ter acesso aos logs da aplicação.
+-Para rodar em produção recomendo que crie um volume para manter a persistencia dos dados e para ter acesso aos logs da aplicação.
 ```sh
 docker volume create cptm_alerts_data
 
