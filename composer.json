@@ -3,7 +3,7 @@
     "description": "Alerta sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.",
     "type": "project",
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.2",
         "rumd3x/php-persistence": "^1.0",
         "php-http/curl-client": "^1.7",
         "vlucas/phpdotenv": "^2.5",
