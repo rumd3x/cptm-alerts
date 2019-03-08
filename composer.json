@@ -1,5 +1,5 @@
 {
-    "name": "rumd3x/php-cptm-alerts",
+    "name": "rumd3x/cptm-alerts",
     "description": "Alerta sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.",
     "type": "project",
     "require": {
