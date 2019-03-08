@@ -161,6 +161,7 @@ Para receber notificações de todas as linhas `NOTIFY_LINES=all`. Para receber 
 * Verifique se a pasta *Storage* tem permissão de escrita
 
 ## Todo
-* Testes Unitários
+* Aumentar o Coverage de Testes Unitários
+* Adicionar
 * Refactor para suportar mais provedores além da CPTM.
 * Outros canais de notificação? Quais?
