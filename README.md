@@ -58,7 +58,7 @@ docker run --detach \
 --env NOTIFY_DAYS=all \
 --env NOTIFY_LINES=all \
 --restart unless-stopped \
---volume cptm_alerts_data:/usr/src/Storage
+--volume cptm_alerts_data:/usr/src/Storage \
 edmur/cptm-alerts
 ```
 
