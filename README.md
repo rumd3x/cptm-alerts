@@ -1,6 +1,10 @@
 # cptm-alerts
 Notificações em tempo real sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.
 
+[![Latest Stable Version](https://poser.pugx.org/rumd3x/cptm-alerts/v/stable)](https://packagist.org/packages/rumd3x/cptm-alerts)
+[![License](https://poser.pugx.org/rumd3x/cptm-alerts/license)](https://packagist.org/packages/rumd3x/cptm-alerts)
+[![composer.lock](https://poser.pugx.org/rumd3x/cptm-alerts/composerlock)](https://packagist.org/packages/rumd3x/cptm-alerts)
+
 ![Notificação Exemplo](/docs/images/notificacoes.png)
 
 ## Getting started
@@ -24,9 +28,11 @@ Notificações em tempo real sobre mudanças de status nas linhas dos trens e me
 
 ### Configurando o Projeto
 
-1. Clone o repositório para uma pasta em seu servidor:
+1. Baixe o projeto para uma pasta em sua maquina:
 ```sh
 git clone https://github.com/rumd3x/cptm-alerts.git
+# ou
+composer create-project rumd3x/cptm-alerts
 ```
 
 2. Vá até a pasta do projeto: `cd cptm-alerts`.
