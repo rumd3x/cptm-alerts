@@ -1,4 +1,4 @@
-# cptm-alerts
+# Cptm-Alerts
 Notificações em tempo real sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.
 
 [![Build Status](https://travis-ci.org/rumd3x/cptm-alerts.svg?branch=master)](https://travis-ci.org/rumd3x/cptm-alerts)
@@ -27,7 +27,13 @@ Notificações em tempo real sobre mudanças de status nas linhas dos trens e me
 
 5. Após dadas as permissões e reinstalado o App salve a **Bot User OAuth Access Token** ela será necessária para configurar o projeto.
 
-### Configurando o Projeto
+## Configurando o Projeto
+
+### Rodando via Docker
+
+- Todo
+
+### Rodando Local
 
 1. Baixe o projeto para uma pasta em sua maquina:
 ```sh
@@ -38,7 +44,7 @@ composer create-project rumd3x/cptm-alerts
 
 2. Vá até a pasta do projeto: `cd cptm-alerts`.
 
-3. Instale as dependências: `composer install`.
+3. Instale as dependências: `composer install` (Não é necessário caso tenha baixado via composer create-project).
 
 4. Crie o seu arquivo de configurações do projeto: `cp .env.example .env`.
 
@@ -51,10 +57,10 @@ composer create-project rumd3x/cptm-alerts
 * * * * * php /caminho/do/projeto/run.php >> /caminho/do/log/run.log 2>&1
 ```
 
-### Arquivo .env
+#### Arquivo .env
 No arquivo `.env` existem possibilidades de personalização no comportamento da aplicação, por meio de configurações no arquivo `.env`
 
-#### NOTIFY_LEVEL
+##### NOTIFY_LEVEL
 A configuração `NOTIFY_LEVEL` deve conter um número inteiro válido e representa o menor nível de criticidade que a aplicação notificará.
 
 Os níveis existentes são:
@@ -69,7 +75,7 @@ Nível 3: Mudanças perigosas, como a paralização da operação em uma linha.
 
 Se desejar receber notificações em todos os níveis deverá configurar para `NOTIFY_LEVEL=0`. Se não quiser receber notificações de mudanças já esperadas trocar para `NOTIFY_LEVEL=1`. Se quiser receber apenas notificações de paralização `NOTIFY_LEVEL=3`.
 
-#### NOTIFY_DAYS
+##### NOTIFY_DAYS
 A configuração `NOTIFY_DAYS` diz os dias que deverão ser enviadas notificações. Deve conter os dias que as notificações serão enviadas separados por vírgula.
 
 Os valores são:
@@ -87,7 +93,7 @@ all: Enviar Notificações todos os dias
 - Exemplo:
 Para receber notificações todos os dias use `NOTIFY_DAYS=all`. Para receber notificações somente em dias da semana use `NOTIFY_DAYS=1,2,3,4,5`.
 
-#### NOTIFY_LINES
+##### NOTIFY_LINES
 A configuração `NOTIFY_LINES` diz as linhas dos trens/metrô que deverão ser monitoradas. Deve conter o numero das linhas separados por vírgula.
 
 Os valores são:
@@ -113,8 +119,8 @@ all: Enviar Notificações para todas as linhas
 - Exemplo:
 Para receber notificações de todas as linhas `NOTIFY_LINES=all`. Para receber notificações somente da linha azul e amarela use `NOTIFY_LINES=1,4`.
 
-### Debugando
-#### Se você fez tudo acima corretamente e não está recebendo notificações em seu canal do slack:
+## Debugando
+### Se você fez tudo acima corretamente e não está recebendo notificações em seu canal do slack:
 * Verifique se o composer foi executado corretamente
 * Verifique a saída do php nos logs do cron (Ou execute o comando redirecionando a saída para um arquivo).
 * Verifique os logs do projeto  no arquivo `/caminho/do/projeto/Storage/Logs/app.log`
