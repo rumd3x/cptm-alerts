@@ -31,7 +31,34 @@ Notificações em tempo real sobre mudanças de status nas linhas dos trens e me
 
 ### Rodando via Docker
 
-- Todo
+* Crie um container do projeto com o comando:
+```sh
+docker run --detach \
+--env SLACK_KEY=your-slack-bot-oauth-key \
+--env SLACK_CHANNEL=channel-name \
+--env NOTIFY_LEVEL=0 \
+--env NOTIFY_DAYS=all \
+--env NOTIFY_LINES=all \
+--restart unless-stopped \
+edmur/cptm-alerts
+```
+Substitua os valores para as chaves `SLACK_KEY` e `SLACK_CHANNEL`. 
+Os parametros `NOTIFY_LEVEL`, `NOTIFY_DAYS` e `NOTIFY_LINES` são opcionais e podem ser omitidos.
+
+Para rodar em produção recomendo que crie um volume para manter a persistencia dos dados e para ter acesso aos logs da aplicação.
+```sh
+docker volume create cptm_alerts_data
+
+docker run --detach \
+--env SLACK_KEY=your-slack-bot-oauth-key \
+--env SLACK_CHANNEL=channel-name \
+--env NOTIFY_LEVEL=0 \
+--env NOTIFY_DAYS=all \
+--env NOTIFY_LINES=all \
+--restart unless-stopped \
+--volume cptm_alerts_data:/usr/src/Storage
+edmur/cptm-alerts
+```
 
 ### Rodando Local
 
@@ -57,10 +84,10 @@ composer create-project rumd3x/cptm-alerts
 * * * * * php /caminho/do/projeto/run.php >> /caminho/do/log/run.log 2>&1
 ```
 
-#### Arquivo .env
-No arquivo `.env` existem possibilidades de personalização no comportamento da aplicação, por meio de configurações no arquivo `.env`
+## Configurações de ambiente
+No arquivo `.env` (ou nas flags `--env` ou `-e` do docker) é onde são armazaneadas as configurações e existem possibilidades de personalização no comportamento da aplicação.
 
-##### NOTIFY_LEVEL
+### NOTIFY_LEVEL
 A configuração `NOTIFY_LEVEL` deve conter um número inteiro válido e representa o menor nível de criticidade que a aplicação notificará.
 
 Os níveis existentes são:
@@ -75,7 +102,7 @@ Nível 3: Mudanças perigosas, como a paralização da operação em uma linha.
 
 Se desejar receber notificações em todos os níveis deverá configurar para `NOTIFY_LEVEL=0`. Se não quiser receber notificações de mudanças já esperadas trocar para `NOTIFY_LEVEL=1`. Se quiser receber apenas notificações de paralização `NOTIFY_LEVEL=3`.
 
-##### NOTIFY_DAYS
+### NOTIFY_DAYS
 A configuração `NOTIFY_DAYS` diz os dias que deverão ser enviadas notificações. Deve conter os dias que as notificações serão enviadas separados por vírgula.
 
 Os valores são:
@@ -93,7 +120,7 @@ all: Enviar Notificações todos os dias
 - Exemplo:
 Para receber notificações todos os dias use `NOTIFY_DAYS=all`. Para receber notificações somente em dias da semana use `NOTIFY_DAYS=1,2,3,4,5`.
 
-##### NOTIFY_LINES
+### NOTIFY_LINES
 A configuração `NOTIFY_LINES` diz as linhas dos trens/metrô que deverão ser monitoradas. Deve conter o numero das linhas separados por vírgula.
 
 Os valores são:
