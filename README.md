@@ -1,10 +1,13 @@
 # CPTM Alerts
 Notificações em tempo real sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.
 
+![GitHub release](https://img.shields.io/github/release/rumd3x/cptm-alerts.svg)
 [![Build Status](https://travis-ci.org/rumd3x/cptm-alerts.svg?branch=master)](https://travis-ci.org/rumd3x/cptm-alerts)
-[![Latest Stable Version](https://poser.pugx.org/rumd3x/cptm-alerts/v/stable)](https://packagist.org/packages/rumd3x/cptm-alerts)
-[![License](https://poser.pugx.org/rumd3x/cptm-alerts/license)](https://packagist.org/packages/rumd3x/cptm-alerts)
-[![composer.lock](https://poser.pugx.org/rumd3x/cptm-alerts/composerlock)](https://packagist.org/packages/rumd3x/cptm-alerts)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/edmur/cptm-alerts.svg)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/edmur/cptm-alerts.svg)
+![GitHub](https://img.shields.io/github/license/rumd3x/cptm-alerts.svg)
+![PHP Version](https://img.shields.io/packagist/php-v/rumd3x/cptm-alerts.svg)
+
 
 ![Notificação Exemplo](/docs/images/notificacoes.png)
 
@@ -43,7 +46,7 @@ docker run --detach \
 edmur/cptm-alerts
 ```
 
-* Substitua os valores para as chaves `SLACK_KEY` e `SLACK_CHANNEL`. 
+* Substitua os valores para as chaves `SLACK_KEY` e `SLACK_CHANNEL`.
 * Os parametros `NOTIFY_LEVEL`, `NOTIFY_DAYS` e `NOTIFY_LINES` são opcionais e podem ser omitidos.
 
 
@@ -158,6 +161,7 @@ Para receber notificações de todas as linhas `NOTIFY_LINES=all`. Para receber 
 * Verifique se a pasta *Storage* tem permissão de escrita
 
 ## Todo
-* Testes Unitários
+* Aumentar o Coverage de Testes Unitários
+* Adicionar
 * Refactor para suportar mais provedores além da CPTM.
 * Outros canais de notificação? Quais?

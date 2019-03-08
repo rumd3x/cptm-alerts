@@ -73,8 +73,11 @@ class LineStatusDiff
     public function isNeutral()
     {
         $startedNow = strpos(strtolower($this->getOld()->situacao), 'encerrada') !== false;
+        $isCurrentlyNormal = strpos(strtolower($this->getNew()->situacao), 'normal') !== false;
+        $startedNormally = ($startedNow && $isCurrentlyNormal);
+
         $finishedNow = strpos(strtolower($this->getNew()->situacao), 'encerrada') !== false;
-        return ($startedNow || $finishedNow);
+        return ($startedNormally || $finishedNow);
     }
 
     /**
@@ -95,7 +98,7 @@ class LineStatusDiff
      */
     public function isNegative()
     {
-        return !$this->isPositive();
+        return !$this->isPositive() && !$this->isNeutral();
     }
 
     /**
@@ -105,7 +108,8 @@ class LineStatusDiff
      */
     public function isReallyBad()
     {
-        $isParalized = strpos(strtolower($this->getNew()->situacao), 'paralisada') !== false;
+        $isParalized = strpos(strtolower($this->getNew()->situacao), 'paralisad') !== false;
+        $isParalized |= strpos(strtolower($this->getNew()->situacao), 'paralizad') !== false;
         $isWorkingPartially = strpos(strtolower($this->getNew()->situacao), 'parcial') !== false;
         return ($isParalized || $isWorkingPartially);
     }
