@@ -1,4 +1,4 @@
-# Cptm-Alerts
+# CPTM Alerts
 Notificações em tempo real sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.
 
 [![Build Status](https://travis-ci.org/rumd3x/cptm-alerts.svg?branch=master)](https://travis-ci.org/rumd3x/cptm-alerts)
