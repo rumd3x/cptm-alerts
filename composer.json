@@ -25,5 +25,8 @@
         "psr-4": {
             "CptmAlerts\\": "App/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
     }
 }
