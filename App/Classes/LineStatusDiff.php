@@ -98,7 +98,7 @@ class LineStatusDiff
      */
     public function isNegative()
     {
-        return !$this->isPositive() && !$this->isNeutral();
+        return !$this->isPositive() && !$this->isNeutral() && !$this->isUnknown();
     }
 
     /**
@@ -112,5 +112,11 @@ class LineStatusDiff
         $isParalized |= strpos(strtolower($this->getNew()->situacao), 'paralizad') !== false;
         $isWorkingPartially = strpos(strtolower($this->getNew()->situacao), 'parcial') !== false;
         return ($isParalized || $isWorkingPartially);
+    }
+
+    private function isUnknown()
+    {
+        $isDadosIndisponiveis = strpos($this->getNew()->situacao, 'Dados Indisponíveis') !== false;
+        return $isDadosIndisponiveis;
     }
 }
