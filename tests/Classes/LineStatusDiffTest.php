@@ -348,4 +348,34 @@ final class LineStatusDiffTest extends TestCase
         $this->assertIsInt($diff->getLevel());
         $this->assertEquals($diff->getLevel(), 3);
     }
+
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
+     * @return void
+     */
+    public function testFromOperacaoNormalToDadosIndisponiveis()
+    {
+        $line = new Line(1);
+
+        $status1 = new LineStatus($line);
+        $status1->dthOcorrencia = Carbon::now();
+        $status1->dthAtualizado = Carbon::now();
+        $status1->situacao = "Operação Normal";
+        $status1->descricao = "";
+
+        $status2 = new LineStatus($line);
+        $status2->dthOcorrencia = Carbon::now()->addMinute();
+        $status2->dthAtualizado = Carbon::now()->addMinute();
+        $status2->situacao = "Dados Indisponíveis";
+        $status2->descricao = "";
+
+        $diff = new LineStatusDiff($status1, $status2);
+        $this->assertFalse($diff->isNegative());
+        $this->assertFalse($diff->isReallyBad());
+        $this->assertFalse($diff->isNeutral());
+        $this->assertFalse($diff->isPositive());
+        $this->assertIsInt($diff->getLevel());
+        $this->assertEquals($diff->getLevel(), 4);
+    }
 }
