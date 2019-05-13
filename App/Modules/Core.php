@@ -47,7 +47,7 @@ class Core
         $dotenv->required('NOTIFY_DAYS')->notEmpty();
         $dotenv->required('NOTIFY_LINES')->notEmpty();
 
-        $this->statusHandler = new StatusHandler();
+        $this->statusHandler = (new StatusHandler())->pushLogHandler($this->logger);
         $this->notifier = new Notifier();
     }
 

@@ -3,10 +3,12 @@ namespace CptmAlerts\Modules;
 
 use Carbon\Carbon;
 use CptmAlerts\Classes\Line;
+use Psr\Log\LoggerInterface;
+use Rumd3x\Persistence\Engine;
+use GuzzleHttp\Client as Guzzle;
 use CptmAlerts\Classes\LineStatus;
 use CptmAlerts\Classes\LineStatusDiff;
-use GuzzleHttp\Client as Guzzle;
-use Rumd3x\Persistence\Engine;
+use GuzzleHttp\Exception\ConnectException;
 
 class StatusHandler
 {
@@ -25,11 +27,29 @@ class StatusHandler
      */
     private $previousStatus;
 
+    /**
+     * @var Psr\Log\LoggerInterface
+     */
+    private $logger;
+
     public function __construct()
     {
-        $this->persistence = new Engine(__DIR__.'/../../Storage/Persistence/cptm');
-        $this->currentStatus = $this->retrieveCurrentStatus();
+        $this->persistence = new Engine(__DIR__ . '/../../Storage/Persistence/cptm');
         $this->previousStatus = $this->retrievePreviousStatus();
+        $this->currentStatus = $this->retrieveCurrentStatus();
+        $this->logger = null;
+    }
+
+    /**
+     * Adds log capabilities to this class
+     *
+     * @param LoggerInterface $logger
+     * @return self
+     */
+    public function pushLogHandler(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        return $this;
     }
 
     /**
@@ -62,7 +82,14 @@ class StatusHandler
     private function retrieveCurrentStatus()
     {
         $guzzle = new Guzzle();
-        $response = $guzzle->get('https://www.diretodostrens.com.br/api/status');
+        try {
+            $response = $guzzle->get('https://www.diretodostrens.com.br/api/status');
+        } catch (ConnectException $e) {
+            if ($this->logger) {
+                $this->logger->warning(sprintf("Erro no DiretoDosTrens: %s", $e->getMessage()));
+            }
+            return $this->previousStatus;
+        }
         return json_decode($response->getBody()->getContents());
     }
 
