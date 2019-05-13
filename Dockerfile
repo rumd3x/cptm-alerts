@@ -12,7 +12,7 @@ WORKDIR /usr/src
 RUN dos2unix generate_env.sh
 RUN chmod +x generate_env.sh
 RUN composer install --no-dev --optimize-autoloader
-RUN (crontab -l ; echo "* * * * * /usr/local/bin/php /usr/src/run.php >> /proc/1/fd/1 2>/proc/1/fd/2") | crontab
+RUN (crontab -l ; echo "* * * * * /usr/local/bin/php /usr/src/run.php >> /usr/src/Storage/Logs/app.log 2>&1") | crontab
 RUN service cron restart
 RUN service cron reload
-ENTRYPOINT ./generate_env.sh && cron -f -L 7 >> /proc/1/fd/1 2>/proc/1/fd/2
+ENTRYPOINT ./generate_env.sh && cron -f -L 8 & tail -f /usr/src/Storage/Logs/app.log

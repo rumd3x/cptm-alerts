@@ -36,7 +36,8 @@ class Core
     {
         $this->timeTracker = new TimeTracker();
         $this->logger = new Logger('CPTM Alerts by Rumd3x');
-        $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../Storage/Logs/' .  date('Y-m-d') . '-app.log'));
+        // $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../Storage/Logs/' .  date('Y-m-d') . '-app.log'));
+        $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../Storage/Logs/app.log'));
         $this->logger->info('Loading assets.');
 
         $dotenv = new Dotenv(__DIR__ . '/../..');
