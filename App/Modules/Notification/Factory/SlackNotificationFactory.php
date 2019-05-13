@@ -42,7 +42,7 @@ class SlackNotificationFactory implements NotificationFactoryInterface
             $attachment = new Attachment($headline);
             $attachment->addField(new Field('big', $bigFieldTop, $bigFieldBottom));
 
-            $attachment->withFooter()->setColor($this->getColor($diff));
+            $attachment->withFooter('CPTM Alert Service')->setColor($this->getColor($diff));
             $notification->attach($attachment);
         }
         return $notification;
