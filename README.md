@@ -162,6 +162,5 @@ Para receber notificações de todas as linhas `NOTIFY_LINES=all`. Para receber 
 
 ## Todo
 * Aumentar o Coverage de Testes Unitários
-* Adicionar
 * Refactor para suportar mais provedores além da CPTM.
-* Outros canais de notificação? Quais?
+* Adicionar suporte a IFTTT Trigger.
