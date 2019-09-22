@@ -1,4 +1,5 @@
 <?php
+
 namespace CptmAlerts\Modules;
 
 use Carbon\Carbon;
@@ -98,6 +99,7 @@ class StatusHandler
      */
     public function persistCurrentStatus()
     {
+        $this->persistence->clear();
         $this->persistence->store($this->currentStatus);
         return $this;
     }
