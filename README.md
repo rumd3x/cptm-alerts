@@ -1,12 +1,18 @@
 # CPTM Alerts
 Notificações em tempo real sobre mudanças de status nas linhas dos trens e metrôs de São Paulo diretamente no canal do Slack.
 
+
 ![GitHub release](https://img.shields.io/github/release/rumd3x/cptm-alerts.svg)
 [![Build Status](https://travis-ci.org/rumd3x/cptm-alerts.svg?branch=master)](https://travis-ci.org/rumd3x/cptm-alerts)
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/edmur/cptm-alerts.svg)
 ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/edmur/cptm-alerts.svg)
 ![GitHub](https://img.shields.io/github/license/rumd3x/cptm-alerts.svg)
 ![PHP Version](https://img.shields.io/packagist/php-v/rumd3x/cptm-alerts.svg)
+
+## ⚠️ Aviso de Deprecação ⚠️
+**Este projeto está terrivelmente desatualizado e abandonado, foi substituido pelo sucessor [trilhos-sp](https://github.com/rumd3x/trilhos-sp). Recomendo fortemente o uso dele ao invés deste projeto.**
+
+---
 
 
 ![Notificação Exemplo](/docs/images/notificacoes.png)
